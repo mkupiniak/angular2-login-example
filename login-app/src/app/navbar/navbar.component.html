@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <nav class="navbar navbar-light bg-faded">
+        <div class="nav navbar-nav">
+          <a class="nav-item nav-link float-xs-right" (click)="signInOut(content)" data-toggle="modal" data-target="#loginModal">{{ _loginText }}</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <template ngbModalContainer></template>
+</div>
+<!-- Modal -->
+<template #content let-c="close">
+  
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="c()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Sign in</h4>
+    <div *ngIf="_loginErr" class="alert alert-danger">
+      Failed to sign in! Please check your credentials and try again.
+    </div>
+  </div>
+  
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit($event, username.value, password.value, company.value)">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          [(ngModel)]="userData.username"
+          #username="ngModel"
+          name="username" 
+          type="text" 
+          class="form-control" 
+          id="username" 
+          placeholder="Enter username" 
+          required>
+        <div *ngIf="username.dirty && !username.valid" class="alert alert-danger">
+          Username is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          [(ngModel)]="userData.password"
+          #password="ngModel"
+          name="password" 
+          type="text" 
+          class="form-control" 
+          id="password" 
+          placeholder="Enter password" 
+          required>
+        <div *ngIf="password.dirty && !password.valid" class="alert alert-danger">
+          Password is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="companyName">Company name</label>
+        <input 
+          [(ngModel)]="userData.companyName"
+          #company="ngModel"
+          name="company"
+          type="text" 
+          class="form-control" 
+          id="company" 
+          placeholder="Enter company name" 
+          required>
+        <div *ngIf="company.dirty && !company.valid" class="alert alert-danger">
+          Company name is required
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c()">Close</button>
+      <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary" id="signinbtn">Sign in</button>
+    </div>
+  </form>
+</template>

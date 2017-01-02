@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+h2 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+a {
+  cursor: pointer;
+}
+
+.close {
+  font-size: 2rem;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.nav-item {
+  padding: 0.5rem;
+}

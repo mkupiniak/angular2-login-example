@@ -1,0 +1,15 @@
+a {
+  cursor: pointer;
+}
+
+button:active {
+  outline: none;
+}
+
+.alert {
+  padding: 0.5rem 0.75rem;
+}
+
+h4 + .alert {
+  margin-bottom: 0;
+}
