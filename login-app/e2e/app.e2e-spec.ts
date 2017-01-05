@@ -1,5 +1,5 @@
 import { LoginAppPage } from './app.po';
-import { browser, element, by } from 'protractor';
+import { element, by } from 'protractor';
 
 describe('login-app App', function() {
   let page: LoginAppPage;
@@ -13,6 +13,8 @@ describe('login-app App', function() {
     expect(page.getParagraphText()).toEqual('Home component');
   });
 
+
+
   it('should open a modal after clicking sign in', () => {
     page.navigateTo('/');
     
@@ -23,6 +25,8 @@ describe('login-app App', function() {
 
     expect(modal.getAttribute('class')).toBe('modal-dialog');
   });
+
+  
 
   it('should have submit button disabled initially', () => {
     page.navigateTo('/');
@@ -35,6 +39,8 @@ describe('login-app App', function() {
     expect(submitBtn.isEnabled()).toBe(false);
   });
 
+  
+
   it('should show 3 input fields', () => {
     page.navigateTo('/');
 
@@ -45,6 +51,8 @@ describe('login-app App', function() {
 
     expect(inputs).toEqual(3);
   });
+
+  
 
   it('should have submit button enabled after filling form', () => {
     page.navigateTo('/');
@@ -64,6 +72,8 @@ describe('login-app App', function() {
 
     expect(submitBtn.isEnabled()).toBe(true);
   });
+
+  
 
   it('should display error after submitting the form (backend not implemented!)', () => {
     page.navigateTo('/');
@@ -87,6 +97,8 @@ describe('login-app App', function() {
     expect(alertBoxText).toEqual('Failed to sign in! Please check your credentials and try again.');
   });
 
+  
+
   it('should find sign in button when not logged in under /loggedin URL and open a modal', () => {
     page.navigateTo('/loggedin');
 
@@ -97,6 +109,8 @@ describe('login-app App', function() {
 
     expect(modal.getAttribute('class')).toBe('modal-dialog');
   });
+
+  
 
   it('should redirect to home page after typing non-existing address', () => {
     page.navigateTo('/wrongaddress');

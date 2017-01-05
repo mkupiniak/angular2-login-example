@@ -23,7 +23,7 @@
     </div>
   </div>
   
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit($event, username.value, password.value, company.value)">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit($event, username.value, password.value, company.value); loginForm.reset()">
     <div class="modal-body">
       <div class="form-group">
         <label for="username">Username</label>

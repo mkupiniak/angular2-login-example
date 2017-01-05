@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { UserService } from './user.service';
 
 @Injectable()
 export class AuthGard implements CanActivate {
 
-  constructor(private _userService: UserService) { }
+  constructor(
+    private _userService: UserService,
+    private _router: Router
+  ) { }
 
   canActivate() {
-    return this._userService.isLoggedIn;
+    // if user passed valid credentials
+    if (this._userService.isLoggedIn) {
+      return true;
+    }
+
+    // if not redirect to home
+    this._router.navigate(['']);
+    return false;
   }
 
 }

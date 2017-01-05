@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggedInComponent implements OnInit {
 
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit() {
   }

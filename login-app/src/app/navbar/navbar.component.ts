@@ -1,5 +1,5 @@
 import { Component, DoCheck } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers: [NgbModal, NgbActiveModal]
+  providers: [NgbModal]
 })
 export class NavbarComponent implements DoCheck {
   private _loginErr: boolean = false;
   private _loginText: string = '';
+  private _activeModal: NgbModalRef;
 
   private userData = {
     username: '',
@@ -23,7 +24,6 @@ export class NavbarComponent implements DoCheck {
     private _modalService: NgbModal,
     private _userService: UserService,
     private _router: Router,
-    private _activeModal: NgbActiveModal
   ) { }
 
   ngDoCheck() {
@@ -33,9 +33,11 @@ export class NavbarComponent implements DoCheck {
 
   signInOut(content) {
     if (this._userService.isLoggedIn) {
+      // log out the user
       this._userService.logout();
     } else {
-      this._modalService.open(content);
+      // open modal and log in user
+      this._activeModal = this._modalService.open(content);
     }
   }
 
@@ -55,6 +57,9 @@ export class NavbarComponent implements DoCheck {
   }
 
   closeActiveModal() {
-    if (this._userService.isLoggedIn) this._activeModal.close(); // doesn't work
+    if (this._userService.isLoggedIn) {
+      this._activeModal.close();
+    }
   }
+
 }
